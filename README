@@ -1,0 +1,60 @@
+Autor: Alex Halatiki Vicente
+
+Este projeto é uma implementação simples do algoritmo DPLL (Davis-Putnam-Logemann-Loveland) para resolução de problemas de satisfatibilidade booleana (SAT). A implementação utiliza a heurística MOM (Máximo número de Ocorrências de Mínimo comprimento) para a escolha de literais, buscando otimizar o processo de decisão.
+
+O algoritmo DPLL é uma técnica recursiva para determinar se uma fórmula booleana em forma normal conjuntiva (CNF) é satisfatível. Esta implementação lê um arquivo de entrada no formato CNF, processa as cláusulas e tenta encontrar uma atribuição de valores que satisfaça todas as cláusulas. Se for encontrada uma solução, os valores dos literais são escritos em um arquivo de resultado.
+
+Estrutura do Código:
+
+    Atomo: Estrutura que representa uma proposição atômica booleana, armazenando seu valor como verdadeiro -> Some(true), falso -> Some(false) ou indefinido -> None.
+    Clausula: Estrutura que contém um conjunto de literais que formam uma cláusula.
+    Funções principais:
+        main: Função de entrada que gerencia a leitura do arquivo e a escrita do resultado.
+        dpll: Implementação do algoritmo DPLL.
+        simplifica: Função que simplifica as cláusulas com base nas atribuições de literais já conhecidas.
+        escolher_literal: Função que aplica a heurística MOM para escolher o próximo literal a ser atribuído.
+
+Pré-requisitos:
+
+    Compilador rustc: guia de instalacao -> https://www.rust-lang.org/tools/install
+
+Compilação do Código:
+
+    Navegue até o diretório do projeto no terminal.
+    Compile o código usando o seguinte comando:
+
+    bash
+
+        rustc main.rs
+
+    Isso gerará um executável no mesmo diretório.
+
+Execução do Programa:
+
+    Prepare um arquivo de entrada no formato CNF. O arquivo deve ter a extensão .cnf e deve estar no mesmo diretório do executável. O formato deve seguir as especificações:
+        A primeira linha deve começar com p cnf <número de literais> <número de cláusulas>.
+        As cláusulas devem ser listadas, terminando com 0.
+        Linhas de comentarios comecam com c
+
+    Execute o programa, passando o nome do arquivo CNF sem a extensão como argumento:
+
+    bash
+
+        ./main nome_do_arquivo
+
+    O resultado será escrito em um arquivo nome_do_arquivo.res no mesmo diretório, contendo "SAT" ou "UNSAT", seguido pelos valores dos literais se a fórmula for satisfatível.
+
+Exemplo de um arquivo CNF:
+
+c Exemplo de arquivo no formato CNF
+c Mais uma linha de comentario porque sim
+p cnf 5 3
+1 -5 -4 0
+-1 5 3 4 0
+-3 -4 0
+
+Possivel arquivo de saida para este exemplo:
+
+SAT
+1 2 -3 4 5 0
+
